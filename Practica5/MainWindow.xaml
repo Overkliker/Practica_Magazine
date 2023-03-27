@@ -1,0 +1,29 @@
+﻿<Window x:Class="Practica5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practica5"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="#e3e1e3">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="Авторизация" FontSize="40"  HorizontalAlignment="Center"/>
+        <Label Content="Имя :" FontSize="30" Grid.Row="1" />
+        <Label Content="Пароль : " FontSize="30" Grid.Row="1" VerticalAlignment="Bottom" />
+
+
+        <PasswordBox Background="#e3e1e3" x:Name="PasswUser" Grid.Row="1" Height="50" FontSize="30" Width="350" VerticalAlignment="Bottom"/>
+        <TextBox Background="#e3e1e3" x:Name="NameUser" Grid.Row="1" Height="50" FontSize="30" Width="350" VerticalAlignment="Top"/>
+
+
+        <Button Background="#f03d33" Foreground="#fbf9fb" x:Name="AutorizeBtn" Grid.Row="2" Height="60" FontSize="40" Width="330" Content="Авторизоваться" HorizontalAlignment="Center" Click="AutorizeBtn_Click"/>
+        
+
+        <Frame x:Name="AllFrame" Grid.Row="0" Grid.RowSpan="3" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>
