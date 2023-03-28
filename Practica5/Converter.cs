@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Practica5
 {
@@ -14,6 +15,8 @@ namespace Practica5
     {
         public static T Desirealize<T>()
         {
+            try
+            {
             OpenFileDialog dialog = new OpenFileDialog();
             if (dialog.ShowDialog() == true)
             {
@@ -25,6 +28,12 @@ namespace Practica5
             {
                 return default(T);
             }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

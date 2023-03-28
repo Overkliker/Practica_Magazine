@@ -48,36 +48,61 @@ namespace Practica5
 
         private void DelBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (DelBox.SelectedIndex != -1)
+            try
             {
-                users.DeleteQuery(Convert.ToInt32(users.GetData()[DelBox.SelectedIndex].id));
-                DelBox.ItemsSource = users.GetData();
+                if (DelBox.SelectedIndex != -1)
+                {
+                    users.DeleteQuery(Convert.ToInt32(users.GetData()[DelBox.SelectedIndex].id));
+                    DelBox.ItemsSource = users.GetData();
+                    UsersGrid.ItemsSource = users.GetData();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (NameBox.Text != null && MailBox.Text != null 
-                && PasswBox.Text != null && AgeBox.Text != null && RolesBox.SelectedIndex != -1)
+            try
             {
-                string passwHash = HelpFunctions.Hashing(PasswBox.Text);
-                int role = roles.GetData()[RolesBox.SelectedIndex].id;
-                int id = Convert.ToInt32((UsersGrid.SelectedItem as DataRowView).Row[0]);
-                users.UpdateQuery(NameBox.Text, MailBox.Text, passwHash, Convert.ToInt32(AgeBox.Text), role, id);
-                UsersGrid.ItemsSource = users.GetData();
+                if (NameBox.Text != null && MailBox.Text != null 
+                    && PasswBox.Text != null && AgeBox.Text != null && RolesBox.SelectedIndex != -1)
+                {
+                    string passwHash = HelpFunctions.Hashing(PasswBox.Text);
+                    int role = roles.GetData()[RolesBox.SelectedIndex].id;
+                    int id = Convert.ToInt32((UsersGrid.SelectedItem as DataRowView).Row[0]);
+                    users.UpdateQuery(NameBox.Text, MailBox.Text, passwHash, Convert.ToInt32(AgeBox.Text), role, id);
+                    UsersGrid.ItemsSource = users.GetData();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
 
         }
 
         private void UsersGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            if ((UsersGrid.SelectedItem as DataRowView) != null)
+            try
             {
-                NameBox.Text = (UsersGrid.SelectedItem as DataRowView).Row[1].ToString();
-                MailBox.Text = (UsersGrid.SelectedItem as DataRowView).Row[2].ToString();
-                PasswBox.Text = (UsersGrid.SelectedItem as DataRowView).Row[3].ToString();
-                AgeBox.Text = (UsersGrid.SelectedItem as DataRowView).Row[4].ToString();
+                if ((UsersGrid.SelectedItem as DataRowView) != null)
+                {
+                    NameBox.Text = (UsersGrid.SelectedItem as DataRowView).Row[1].ToString();
+                    MailBox.Text = (UsersGrid.SelectedItem as DataRowView).Row[2].ToString();
+                    PasswBox.Text = (UsersGrid.SelectedItem as DataRowView).Row[3].ToString();
+                    AgeBox.Text = (UsersGrid.SelectedItem as DataRowView).Row[4].ToString();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

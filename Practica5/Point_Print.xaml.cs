@@ -57,28 +57,44 @@ namespace Practica5
 
         private void InsertBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (CityBox.SelectedIndex != -1 && WorkerBox.SelectedIndex != -1
-                && AdressBox.Text != null)
+            try
             {
-                int city = cities.GetData()[CityBox.SelectedIndex].id;
-                int worker = workers.GetData()[WorkerBox.SelectedIndex].id;
-                points.InsertQuery(city, AdressBox.Text, worker);
-                PointsGrid.ItemsSource = points.GetData();
-                IdBox.ItemsSource = points.GetData();
+                if (CityBox.SelectedIndex != -1 && WorkerBox.SelectedIndex != -1
+                    && AdressBox.Text != null)
+                {
+                    int city = cities.GetData()[CityBox.SelectedIndex].id;
+                    int worker = workers.GetData()[WorkerBox.SelectedIndex].id;
+                    points.InsertQuery(city, AdressBox.Text, worker);
+                    PointsGrid.ItemsSource = points.GetData();
+                    IdBox.ItemsSource = points.GetData();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (CityUpBox.SelectedIndex != -1 && WorkerUpBox.SelectedIndex != -1
-                && AdressUpBox.Text != null)
+            try
             {
-                int city = cities.GetData()[CityUpBox.SelectedIndex].id;
-                int worker = workers.GetData()[WorkerUpBox.SelectedIndex].id;
-                int id = Convert.ToInt32((PointsGrid.SelectedItem as DataRowView).Row[0]);
-                points.UpdateQuery(city, AdressUpBox.Text, worker, id);
-                PointsGrid.ItemsSource = points.GetData();
+                if (CityUpBox.SelectedIndex != -1 && WorkerUpBox.SelectedIndex != -1
+                    && AdressUpBox.Text != null)
+                {
+                    int city = cities.GetData()[CityUpBox.SelectedIndex].id;
+                    int worker = workers.GetData()[WorkerUpBox.SelectedIndex].id;
+                    int id = Convert.ToInt32((PointsGrid.SelectedItem as DataRowView).Row[0]);
+                    points.UpdateQuery(city, AdressUpBox.Text, worker, id);
+                    PointsGrid.ItemsSource = points.GetData();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)

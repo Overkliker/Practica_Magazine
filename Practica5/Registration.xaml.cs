@@ -36,40 +36,48 @@ namespace Practica5
 
         private void RegBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (EmailBox.Text != null && AgeBox.Text != null && NameBox.Text != null && PasswBox.Password.ToString() != null && RolesBox.SelectedIndex != -1)
+            try
             {
-                int ct = 0;
-                for (int i = 0; i < AgeBox.Text.Length; i++)
+                if (EmailBox.Text != null && AgeBox.Text != null && NameBox.Text != null && PasswBox.Password.ToString() != null && RolesBox.SelectedIndex != -1)
                 {
-                    if (char.IsDigit(Convert.ToChar(AgeBox.Text[i])))
+                    int ct = 0;
+                    for (int i = 0; i < AgeBox.Text.Length; i++)
                     {
-                        ct++;
+                        if (char.IsDigit(Convert.ToChar(AgeBox.Text[i])))
+                        {
+                            ct++;
+                        }
                     }
-                }
-                if (ct == AgeBox.Text.Length)
-                {
-                    string mdPassw = HelpFunctions.Hashing(PasswBox.Password.ToString());
-                    int age = Convert.ToInt32(AgeBox.Text);
-                    int role = roles.GetData()[RolesBox.SelectedIndex].id;
-
-                    users.InsertQuery(NameBox.Text, EmailBox.Text, mdPassw, age, role);
-                    if (role == 3)
+                    if (ct == AgeBox.Text.Length)
                     {
-                        int lastID = roles.GetData()[roles.GetData().Count - 1].id;
-                        workers.InsertQuery(lastID);
-                    }
+                        string mdPassw = HelpFunctions.Hashing(PasswBox.Password.ToString());
+                        int age = Convert.ToInt32(AgeBox.Text);
+                        int role = roles.GetData()[RolesBox.SelectedIndex].id;
 
-                    ((Application.Current.MainWindow as MainWindow).AllFrame.Content as Profile_Admin).AdminFrame.Content = null;
+                        users.InsertQuery(NameBox.Text, EmailBox.Text, mdPassw, age, role);
+                        if (role == 3)
+                        {
+                            int lastID = roles.GetData()[roles.GetData().Count - 1].id;
+                            workers.InsertQuery(lastID);
+                        }
+
+                        ((Application.Current.MainWindow as MainWindow).AllFrame.Content as Profile_Admin).AdminFrame.Content = null;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Неверно введён возраст");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Неверно введён возраст");
+                    MessageBox.Show("Одно из полей не заполнено");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Одно из полей не заполнено");
+                MessageBox.Show(ex.Message);
             }
+
         }
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)

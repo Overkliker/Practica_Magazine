@@ -45,6 +45,6 @@
                 Background="#f03d33" Foreground="#fbf9fb"
                 FontSize="25" Content="Delete" Click="DelBtn_Click"/>
 
-        <Frame x:Name="UsPrintFrame" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="5" NavigationUIVisibility="Hidden"/>
+       
     </Grid>
 </Page>

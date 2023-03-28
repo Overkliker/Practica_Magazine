@@ -45,12 +45,20 @@ namespace Practica5
 
         private void InsertBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (CitiesInBox.SelectedIndex != -1)
+            try
             {
-                warehouse.InsertQuery(cities.GetData()[CitiesInBox.SelectedIndex].id);
-                WaresGrid.ItemsSource = warehouse.GetData();
-                WareDelBox.ItemsSource = warehouse.GetData();
+                if (CitiesInBox.SelectedIndex != -1)
+                {
+                    warehouse.InsertQuery(cities.GetData()[CitiesInBox.SelectedIndex].id);
+                    WaresGrid.ItemsSource = warehouse.GetData();
+                    WareDelBox.ItemsSource = warehouse.GetData();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void DelWareBtn_Click(object sender, RoutedEventArgs e)
@@ -66,19 +74,35 @@ namespace Practica5
 
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (CitiesUpBox.SelectedIndex != -1)
+            try
             {
-                warehouse.UpdateQuery(warehouse.GetData()[WareDelBox.SelectedIndex].id, Convert.ToInt32((WaresGrid.SelectedItem as DataRowView).Row[0]));
-                WaresGrid.ItemsSource = warehouse.GetData();
+                if (CitiesUpBox.SelectedIndex != -1)
+                {
+                    warehouse.UpdateQuery(warehouse.GetData()[WareDelBox.SelectedIndex].id, Convert.ToInt32((WaresGrid.SelectedItem as DataRowView).Row[0]));
+                    WaresGrid.ItemsSource = warehouse.GetData();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void WaresGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            if ((WaresGrid.SelectedItem as DataRowView) != null)
+            try
             {
+                if ((WaresGrid.SelectedItem as DataRowView) != null)
+                {
 
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

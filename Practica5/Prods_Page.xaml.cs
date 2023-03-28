@@ -55,14 +55,22 @@ namespace Practica5
 
         private void InsertBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (TypeInBox.SelectedIndex != -1 && DiscInBox.Text != null && SellInBox.Text != null)
+            try
             {
-                int type = typesProd.GetData()[TypeInBox.SelectedIndex].id;
-                prods.InsertQuery(type, DiscInBox.Text, Convert.ToInt32(SellInBox.Text));
+                if (TypeInBox.SelectedIndex != -1 && DiscInBox.Text != null && SellInBox.Text != null)
+                {
+                    int type = typesProd.GetData()[TypeInBox.SelectedIndex].id;
+                    prods.InsertQuery(type, DiscInBox.Text, Convert.ToInt32(SellInBox.Text));
 
-                ProdsGrid.ItemsSource = prods.GetData();
-                DelBox.ItemsSource = prods.GetData();
+                    ProdsGrid.ItemsSource = prods.GetData();
+                    DelBox.ItemsSource = prods.GetData();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void DelBtn_Click(object sender, RoutedEventArgs e)
@@ -78,14 +86,22 @@ namespace Practica5
 
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (DiscUpBox.Text != null && TypeUpBox.SelectedIndex != -1)
+            try
             {
-                int type = typesProd.GetData()[TypeUpBox.SelectedIndex].id;
-                int id = Convert.ToInt32((ProdsGrid.SelectedItem as DataRowView).Row[0]);
-                prods.UpdateQuery(type, DiscUpBox.Text, id);
+                if (DiscUpBox.Text != null && TypeUpBox.SelectedIndex != -1)
+                {
+                    int type = typesProd.GetData()[TypeUpBox.SelectedIndex].id;
+                    int id = Convert.ToInt32((ProdsGrid.SelectedItem as DataRowView).Row[0]);
+                    prods.UpdateQuery(type, DiscUpBox.Text, id);
 
-                ProdsGrid.ItemsSource = prods.GetData();
+                    ProdsGrid.ItemsSource = prods.GetData();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

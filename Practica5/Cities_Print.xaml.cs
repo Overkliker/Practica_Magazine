@@ -46,11 +46,19 @@ namespace Practica5
 
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (CitiesUpBox.Text != null)
+            try
             {
-                cities.UpdateQuery(CitiesUpBox.Text, Convert.ToInt32((CitiesGrid.SelectedItem as DataRowView).Row[0]));
-                CitiesGrid.ItemsSource = cities.GetData(); 
+                if (CitiesUpBox.Text != null)
+                {
+                    cities.UpdateQuery(CitiesUpBox.Text, Convert.ToInt32((CitiesGrid.SelectedItem as DataRowView).Row[0]));
+                    CitiesGrid.ItemsSource = cities.GetData(); 
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void DelCityBtn_Click(object sender, RoutedEventArgs e)
@@ -65,12 +73,20 @@ namespace Practica5
 
         private void InsertBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (CitiesInBox.Text != null)
+            try
             {
-                cities.InsertQuery(CitiesInBox.Text);
-                CitiesGrid.ItemsSource = cities.GetData();
-                CityDelBox.ItemsSource = cities.GetData();
+                if (CitiesInBox.Text != null)
+                {
+                    cities.InsertQuery(CitiesInBox.Text);
+                    CitiesGrid.ItemsSource = cities.GetData();
+                    CityDelBox.ItemsSource = cities.GetData();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

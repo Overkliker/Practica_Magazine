@@ -43,38 +43,47 @@ namespace Practica5
 
         private void BuyBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (PriceCt.Text != null)
+            try
             {
-                int ct = 0;
-                for (int i = 0; i < PriceCt.Text.Length; i++)
+                if (PriceCt.Text != null)
                 {
-                    if (char.IsDigit(Convert.ToChar(PriceCt.Text[i])))
+                    int ct = 0;
+                    for (int i = 0; i < PriceCt.Text.Length; i++)
                     {
-                        ct++;
+                        if (char.IsDigit(Convert.ToChar(PriceCt.Text[i])))
+                        {
+                            ct++;
+                        }
+                    }
+
+                    if (ct == PriceCt.Text.Length)
+                    {
+                        //Writing check
+                        int allprice = price;
+                        checks.InsertQuery(idProd, userID, allprice);
+                        int newCheckID = checks.GetData()[checks.GetData().Count - 1].id;
+                        HelpFunctions.MakeCheck(newCheckID, prodName, allprice, Convert.ToInt32(PriceCt.Text));
+
+                        //Writing history
+                        bought.InsertQuery(idProd, true);
+                        int lastBought = bought.GetData()[bought.GetData().Count - 1].id;
+                        purchase.InsertQuery(userID, lastBought);
+
+                        (((Application.Current.MainWindow as MainWindow).AllFrame.Content as User_Profile).UserFrame.Content as Basket).BasketFrame.Content = null;
                     }
                 }
-
-                if (ct == PriceCt.Text.Length)
-                {
-                    //Writing check
-                    int allprice = price;
-                    checks.InsertQuery(idProd, userID, allprice);
-                    int newCheckID = checks.GetData()[checks.GetData().Count - 1].id;
-                    HelpFunctions.MakeCheck(newCheckID, prodName, allprice, Convert.ToInt32(PriceCt.Text));
-
-                    //Writing history
-                    bought.InsertQuery(idProd, true);
-                    int lastBought = bought.GetData()[bought.GetData().Count - 1].id;
-                    purchase.InsertQuery(userID, lastBought);
-
-                    (((Application.Current.MainWindow as MainWindow).AllFrame.Content as User_Profile).UserFrame.Content as Basket).BasketFrame.Content = null;
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
         }
 
         private void CountBtn_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
             if (PriceCt.Text != null)
             {
                 int ct = 0;
@@ -91,6 +100,11 @@ namespace Practica5
                     PriceBox.Content = price * Convert.ToInt32(PriceCt.Text);
                 }
             }
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
     }
 }

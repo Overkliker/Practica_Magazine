@@ -46,12 +46,20 @@ namespace Practica5
 
         private void InsertBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (RolesInBox.Text != null)
+            try
             {
-                roles.InsertQuery(RolesInBox.Text);
-                RolesGrid.ItemsSource = roles.GetData();
-                RoleDelBox.ItemsSource = roles.GetData();
+                if (RolesInBox.Text != null)
+                {
+                    roles.InsertQuery(RolesInBox.Text);
+                    RolesGrid.ItemsSource = roles.GetData();
+                    RoleDelBox.ItemsSource = roles.GetData();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void DelRoleBtn_Click(object sender, RoutedEventArgs e)
@@ -66,12 +74,20 @@ namespace Practica5
 
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (RoleUpBox.Text != null)
+            try
             {
-                roles.UpdateQuery(RoleUpBox.Text, Convert.ToInt32((RolesGrid.SelectedItem as DataRowView).Row[0]));
-                RolesGrid.ItemsSource = roles.GetData();
-                RoleDelBox.ItemsSource = roles.GetData();
+                if (RoleUpBox.Text != null)
+                {
+                    roles.UpdateQuery(RoleUpBox.Text, Convert.ToInt32((RolesGrid.SelectedItem as DataRowView).Row[0]));
+                    RolesGrid.ItemsSource = roles.GetData();
+                    RoleDelBox.ItemsSource = roles.GetData();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

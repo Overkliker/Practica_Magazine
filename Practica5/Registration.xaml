@@ -44,6 +44,5 @@
         <Button Background="#f03d33" Foreground="#fbf9fb" x:Name="RegBtn" Height="50" Width="300" Grid.Row="5" Content="Зарегистрировать" FontSize="30" Click="RegBtn_Click"/>
         <Button Background="#f03d33" Foreground="#fbf9fb" Margin="10 0 0 0" x:Name="BackBtn" Grid.Column="0" Width="100" Height="50" Content="Back" FontSize="30" HorizontalAlignment="Left" Click="BackBtn_Click"/>
 
-        <Frame x:Name="RegFrame" Grid.Row="0" Grid.RowSpan="6" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Page>
