@@ -15,8 +15,7 @@ namespace Practica5
     {
         public static T Desirealize<T>()
         {
-            try
-            {
+
             OpenFileDialog dialog = new OpenFileDialog();
             if (dialog.ShowDialog() == true)
             {
@@ -29,11 +28,8 @@ namespace Practica5
                 return default(T);
             }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
 
         }
     }
-}
+
